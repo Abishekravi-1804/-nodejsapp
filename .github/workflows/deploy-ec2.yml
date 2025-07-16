@@ -18,7 +18,7 @@ jobs:
           username: ec2-user
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            docker pull your-dockerhub-username/nodejs-app:latest
+            docker pull abishekravi123/nodejs-app:latest
             docker stop nodejs-app || true
             docker rm nodejs-app || true
-            docker run -d -p 80:3000 --name nodejs-app your-dockerhub-username/nodejs-app:latest
+            docker run -d -p 80:3000 --name nodejs-app abishekravi123/nodejs-app:latest
