@@ -5,9 +5,10 @@ on:
     workflows: ["Docker Build & Push"]
     types:
       - completed
+
 jobs:
   deploy:
-    runs-on: ubuntu:latest
+    runs-on: ubuntu-latest 
 
     steps:
       - name: Deploy to EC2 via SSH
@@ -17,7 +18,14 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
+            echo "Pulling latest Docker image..."
             docker pull abishekravi123/nodejs-app:latest
+
+            echo "Stopping existing container if exists..."
             docker stop nodejs-app || true
+
+            echo "Removing old container..."
             docker rm nodejs-app || true
+
+            echo "Running latest container on port 80..."
             docker run -d -p 80:3000 --name nodejs-app abishekravi123/nodejs-app:latest
