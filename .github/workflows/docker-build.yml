@@ -26,4 +26,4 @@ jobs:
           with:
               context: .
               push: true
-              tags: your-dockerhub-username/nodejs-app:latest
+              tags: tags: abishekravi123/nodejs-app:latest
