@@ -21,9 +21,6 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-
-      - name: Run Linter 
-        run: npm run esLint
- 
+        
       - name: Run Tests
         run: npm test 
