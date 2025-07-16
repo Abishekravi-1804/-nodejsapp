@@ -6,7 +6,8 @@ on:
 
 jobs: 
   docker: 
-     runs-on: ubuntu-latest
+     runs-on: ec2-user
+
 
      steps: 
         - name: chekout 

@@ -1,0 +1,24 @@
+name: Deploy to EC2
+
+on:
+  workflow_run:
+    workflows: ["Docker Build & Push"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to EC2 via SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ec2-user
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            docker pull your-dockerhub-username/nodejs-app:latest
+            docker stop nodejs-app || true
+            docker rm nodejs-app || true
+            docker run -d -p 80:3000 --name nodejs-app your-dockerhub-username/nodejs-app:latest
